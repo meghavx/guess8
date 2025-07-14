@@ -3,6 +3,8 @@ import { Box, Flex, Button, Heading, Text } from "@chakra-ui/react"
 import { languages } from "@/data/languages" 
 import { words } from "@/data/words"
 import { getFarewellText } from "@/utils"
+import { useWindowSize } from "react-use"
+import Confetti from "react-confetti"
 
 export default function App() {
   // State values
@@ -26,6 +28,9 @@ export default function App() {
 
   // Static values
   const alphabet: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+  // Dynamic values
+  const { width, height } = useWindowSize()
 
   // Functions
   function pickRandomWord() { 
@@ -301,6 +306,9 @@ export default function App() {
 
   return (
     <Flex {...containerProps}>
+      
+      {gameWon && <Confetti width={width} height={height} />}
+      
       <Flex {...box0}>
 
         <Flex {...box1}>
