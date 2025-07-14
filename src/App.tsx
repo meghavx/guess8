@@ -5,16 +5,26 @@ import { words } from "@/data/words"
 
 export default function App() {
   const [currentWord, setCurrentWord] = useState("")
-  
-  useEffect(() => {
-    const randomWord = words[Math.floor(Math.random() * words.length)]
+  const [guessedLettersMap, setGuessedLettersMap] = useState(new Map<string, boolean>())
+
+  useEffect(() => { 
+    const randomIndex = Math.floor(Math.random() * words.length)
+    const randomWord = words[randomIndex]
     setCurrentWord(randomWord)
   }, [])
 
-  const gameWon: bool = true
-  const gameLost: bool = false
+  const gameWon: boolean = true
+  const gameLost: boolean = false
   
   const alphabet: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+  function recordGuessedLetter(letter: string) {
+    setGuessedLettersMap(prevMap => {
+      const newMap = new Map(prevMap)
+      newMap.set(letter, currentWord.includes(letter))
+      return newMap
+    })
+  }
 
   // Layout Props
   const containerProps = {
@@ -139,7 +149,6 @@ export default function App() {
     w: 2,
     size: "sm",
     borderRadius: "md",
-    bg: "#FCBA29",
     color: "#1E1E1E",
     borderColor: "#D7D7D7",
   }
@@ -204,10 +213,24 @@ export default function App() {
 
   const keyboardElements = alphabet
     .split("")
-    .map((letter, index) =>
-      <Button key={index} {...keyboardKeyProps}>
-        {letter}
-      </Button>
+    .map(letter => {
+      const isGuessed = guessedLettersMap.has(letter)
+      const isCorrect = isGuessed && guessedLettersMap.get(letter)
+      
+      return (
+        <Button 
+          key={letter} 
+          {...keyboardKeyProps}
+          bg={ isGuessed 
+            ? isCorrect ? "#10A95B" : "#EC5D49"
+            : "#FCBA29"
+          }
+          onClick={() => recordGuessedLetter(letter)}
+        >
+          {letter}
+        </Button>
+      )
+    }
   )
 
   return (
