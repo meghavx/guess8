@@ -4,8 +4,21 @@ import { languages } from "@/data/languages"
 import { words } from "@/data/words"
 
 export default function App() {
+  // State values
   const [currentWord, setCurrentWord] = useState("")
   const [guessedLettersMap, setGuessedLettersMap] = useState(new Map<string, boolean>())
+  const [correctGuessCount, setCorrectGuessCount] = useState(0)
+
+  // Derived values
+  const wrongGuessCount = Array
+    .from(guessedLettersMap.values())
+    .reduce((acc, val) => val ? acc : acc + 1, 0)
+  
+  const gameWon: boolean = correctGuessCount === currentWord.length 
+  const gameLost: boolean = wrongGuessCount === currentWord.length
+
+  // Static values
+  const alphabet: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
   useEffect(() => { 
     const randomIndex = Math.floor(Math.random() * words.length)
@@ -13,17 +26,22 @@ export default function App() {
     setCurrentWord(randomWord)
   }, [])
 
-  const gameWon: boolean = true
-  const gameLost: boolean = false
-  
-  const alphabet: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
   function recordGuessedLetter(letter: string) {
+    const isCorrect = currentWord.includes(letter)
+
     setGuessedLettersMap(prevMap => {
       const newMap = new Map(prevMap)
-      newMap.set(letter, currentWord.includes(letter))
+      newMap.set(letter, isCorrect)
       return newMap
     })
+
+    if (isCorrect) {
+      // Frequency of occurrence
+      const freq = currentWord
+        .split("")
+        .reduce((acc, c) => c === letter ? acc + 1 : acc, 0)
+      setCorrectGuessCount(prevCount => prevCount + freq)
+    }
   }
 
   // Layout Props
