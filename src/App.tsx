@@ -2,7 +2,7 @@ import { Box, Flex, Button, Heading, Text } from "@chakra-ui/react"
 import { languages } from "./languages" 
 
 export default function App() {
-  const gameWon: bool = false
+  const gameWon: bool = true
   const gameLost: bool = false
   
   const alphabet: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -68,6 +68,7 @@ export default function App() {
     p: 1,
     whiteSpace: "pre-line",
     textAlign: "center",
+    fontWeight: "semibold",
   }
 
   const box2 = {
@@ -142,15 +143,44 @@ export default function App() {
     borderColor: "#D7D7D7",
   }
 
-  const languageChipElements = languages.map((lang, index) => 
+  const headerAndDescription = <>
+    <Heading {...headingProps}>
+      Assembly: Endgame</Heading>
+    <Text {...subHeadingProps}>
+      {`Guess the word in under 8 attempts to keep the
+      programming world safe from Assembly!`}
+    </Text>
+  </>
+
+  const gameStatus = gameWon 
+    ? <Box {...gameStatusProps}>
+        <Text>You win!</Text>
+        <Text fontSize="sm">Well done! 🎉</Text>
+      </Box>
+        
+    : gameLost 
+      ? <Box {...gameStatusProps}>
+          <Text>Game over!</Text>
+          <Text fontSize="sm">You lose! Better start learning Assembly 😭</Text>
+        </Box>
+
+      : <Box {...gameStatusProps}>
+          <Text fontSize="sm" fontStyle="italic">"Farewell HTML & CSS" 🫡</Text>
+        </Box>  
+
+  const languageChipElements = languages.map(lang => 
     <Text 
-      key={index} 
+      key={lang.name}
       {...languageChipProps}
       {...lang}
     >
       {lang.name}
      </Text>
   )
+
+  const wordInput = Array(8)
+    .fill('')
+    .map(() => <Box {...letterInputProps}></Box>)
 
   const keyboard = alphabet.split("").map((char, index) =>
     <Button 
@@ -162,72 +192,23 @@ export default function App() {
   )
 
   return (
-    // Container
     <Flex {...containerProps}>
-      
-      {/* Box 0 */}
       <Flex {...box0}>
 
-        {/* Box 1 Header + Game Status */}
         <Flex {...box1}>
-
-          {/* Box 1a Header */}
-          <Flex {...box1a}>
-            <Heading {...headingProps}>Assembly: Endgame</Heading>
-            <Text {...subHeadingProps}>
-              {`Guess the word in under 8 attempts to keep the
-              programming world safe from Assembly!`}
-            </Text>
-          </Flex>
-
-          {/* Box 1b Game Status */}
-          <Flex {...box1b}>
-            { gameWon 
-              ? <Box {...gameStatusProps}>
-                  <Text fontWeight="semibold">You win!</Text>
-                  <Text fontSize="sm">Well done! 🎉</Text>
-                </Box>
-                  
-              : gameLost 
-                ? <Box {...gameStatusProps}>
-                    <Text fontWeight="semibold">Game over!</Text>
-                    <Text fontSize="sm">You lose! Better start learning Assembly 😭</Text>
-                  </Box>
-
-                : <Box {...gameStatusProps}>
-                    <Text>"Farewell HTML & CSS" 🫡</Text>
-                  </Box>  
-            }
-          </Flex>
+          <Flex {...box1a}> {headerAndDescription} </Flex>
+          <Flex {...box1b}> {gameStatus} </Flex>
         </Flex>
 
-        {/* Box 2 Languages + Word Input */}
         <Flex {...box2}>
-
-          {/* Box 2a Languages */}
-          <Flex {...box2a}>
-            {languageChipElements}
-          </Flex>
-
-          {/* Box 2b Word Input */}
-          <Flex {...box2b}>
-            {Array(8)
-              .fill('')
-              .map(() => 
-                <Box {...letterInputProps}></Box>
-              )
-            }
-          </Flex>
+          <Flex {...box2a}> {languageChipElements} </Flex>
+          <Flex {...box2b}> {wordInput} </Flex>
         </Flex>
 
-        {/* Box 3 Keyboard */}
         <Flex {...box3}>
-          <Flex {...keyboardContainerProps}>
-            {keyboard}
-          </Flex>
+          <Flex {...keyboardContainerProps}> {keyboard} </Flex>
         </Flex>
 
-        {/* Box 4 New Game Button */}
         <Flex {...box4}>
           <Button {...newGameBtnProps}>New Game</Button>
         </Flex>
