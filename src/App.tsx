@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Box, Flex, Button, Heading, Text } from "@chakra-ui/react"
 import { languages } from "@/data/languages" 
 import { words } from "@/data/words"
@@ -6,7 +6,7 @@ import { getFarewellText } from "@/utils"
 
 export default function App() {
   // State values
-  const [currentWord, setCurrentWord] = useState("")
+  const [currentWord, setCurrentWord] = useState(() => pickRandomWord())
   const [guessedLettersMap, setGuessedLettersMap] = useState(new Map<string, boolean>())
  
   // Derived values
@@ -27,11 +27,12 @@ export default function App() {
   // Static values
   const alphabet: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-  useEffect(() => { 
+  // Functions
+  function pickRandomWord() { 
     const randomIndex = Math.floor(Math.random() * words.length)
     const randomWord = words[randomIndex]
-    setCurrentWord(randomWord)
-  }, [])
+    return randomWord
+  }
 
   function recordGuessedLetter(letter: string) {
     const isCorrect = currentWord.includes(letter)
@@ -286,7 +287,9 @@ export default function App() {
   )
 
   const newGameButton = gameOver && 
-    <Button {...newGameBtnProps}> 
+    <Button 
+      {...newGameBtnProps}
+    > 
       New Game 
     </Button>
 
