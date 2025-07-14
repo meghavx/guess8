@@ -1,7 +1,18 @@
+import { useState, useEffect } from "react"
 import { Box, Flex, Button, Heading, Text } from "@chakra-ui/react"
-import { languages } from "./languages" 
+import { languages } from "@/data/languages" 
+import { words } from "@/data/words"
 
 export default function App() {
+  const [currentWord, setCurrentWord] = useState("")
+  
+  useEffect(() => {
+    const randomWord = words[Math.floor(Math.random() * words.length)]
+    setCurrentWord(randomWord)
+  }, [])
+
+  alert(currentWord)
+
   const gameWon: bool = true
   const gameLost: bool = false
   
