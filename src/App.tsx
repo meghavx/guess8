@@ -11,8 +11,6 @@ export default function App() {
     setCurrentWord(randomWord)
   }, [])
 
-  alert(currentWord)
-
   const gameWon: bool = true
   const gameLost: bool = false
   
@@ -111,10 +109,15 @@ export default function App() {
     gap: 0.5,
   }  
 
-  const letterInputProps = {
+  const letterProps = {
     w: 9,
-    h: 9,
+    h: 9,  
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     bg: "#323232",
+    color: "#F9F4DA",
+    fontWeight: "semibold",
     borderBottom: "xs",
     borderColor: "#F9F4DA",
   }
@@ -129,7 +132,7 @@ export default function App() {
     justify: "center",
     wrap: "wrap",
     gap: 1,
-    px: 10,
+    maxW: "420px",
   }
 
   const keyboardKeyProps = {
@@ -148,6 +151,7 @@ export default function App() {
   }
 
   const newGameBtnProps = {
+    display: gameWon || gameLost ? "flex" : "none",
     w: 200,
     bg: "#11B5E5",
     color: "#1E1E1E",
@@ -179,27 +183,31 @@ export default function App() {
           <Text fontSize="sm" fontStyle="italic">"Farewell HTML & CSS" 🫡</Text>
         </Box>  
 
-  const languageChipElements = languages.map(lang => 
-    <Text 
-      key={lang.name}
-      {...languageChipProps}
-      {...lang}
-    >
-      {lang.name}
-     </Text>
-  )
+  const languageChipElements = languages
+    .map(lang => 
+      <Text 
+        key={lang.name}
+        {...languageChipProps}
+        {...lang}
+      >
+        {lang.name}
+      </Text>
+    )
 
-  const wordInput = Array(8)
-    .fill('')
-    .map(() => <Box {...letterInputProps}></Box>)
+  const wordLetters = currentWord
+    .split("")
+    .map((letter, index) => 
+      <Text key={index} {...letterProps}>
+        {letter}
+      </Text>
+    )
 
-  const keyboard = alphabet.split("").map((char, index) =>
-    <Button 
-      key={index} 
-      {...keyboardKeyProps}
-    >
-      {char}
-    </Button>
+  const keyboardElements = alphabet
+    .split("")
+    .map((letter, index) =>
+      <Button key={index} {...keyboardKeyProps}>
+        {letter}
+      </Button>
   )
 
   return (
@@ -213,11 +221,11 @@ export default function App() {
 
         <Flex {...box2}>
           <Flex {...box2a}> {languageChipElements} </Flex>
-          <Flex {...box2b}> {wordInput} </Flex>
+          <Flex {...box2b}> {wordLetters} </Flex>
         </Flex>
 
         <Flex {...box3}>
-          <Flex {...keyboardContainerProps}> {keyboard} </Flex>
+          <Flex {...keyboardContainerProps}> {keyboardElements} </Flex>
         </Flex>
 
         <Flex {...box4}>
