@@ -7,13 +7,18 @@ export default function App() {
   // State values
   const [currentWord, setCurrentWord] = useState("")
   const [guessedLettersMap, setGuessedLettersMap] = useState(new Map<string, boolean>())
-  const [correctGuessCount, setCorrectGuessCount] = useState(0)
-
+ 
   // Derived values
   const wrongGuessCount = Array
     .from(guessedLettersMap.values())
     .reduce((acc, val) => val ? acc : acc + 1, 0)
   
+  const correctGuessCount = currentWord
+    .split("")
+    .reduce((acc, letter) => 
+      guessedLettersMap.has(letter) ? acc + 1 : acc, 0
+    )
+
   const gameWon: boolean = correctGuessCount === currentWord.length 
   const gameLost: boolean = wrongGuessCount === currentWord.length
 
@@ -34,14 +39,6 @@ export default function App() {
       newMap.set(letter, isCorrect)
       return newMap
     })
-
-    if (isCorrect) {
-      // Frequency of occurrence
-      const freq = currentWord
-        .split("")
-        .reduce((acc, c) => c === letter ? acc + 1 : acc, 0)
-      setCorrectGuessCount(prevCount => prevCount + freq)
-    }
   }
 
   // Layout Props
