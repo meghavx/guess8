@@ -197,11 +197,11 @@ export default function App() {
 
   const keyboardKeyProps = {
     w: 2,
-    size: "sm",
+    fontSize: "sm",
+    opacity: 1,
     borderRadius: "md",
     color: "#1E1E1E",
     borderColor: "#D7D7D7",
-    disabled: gameOver,
   }
   
   const box4 = {
@@ -286,7 +286,7 @@ export default function App() {
     .map(letter => {
       const isGuessed = guessedLettersMap.has(letter)
       const isCorrect = isGuessed && guessedLettersMap.get(letter)
-      
+      const shouldBeDisabled = guessedLettersMap.has(letter) || gameOver
       return (
         <Button 
           key={letter} 
@@ -296,6 +296,7 @@ export default function App() {
           }
           {...keyboardKeyProps}
           onClick={() => recordGuessedLetter(letter)}
+          disabled={shouldBeDisabled}
         >
           {letter}
         </Button>
