@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { Box, Flex, Button, Heading, Text } from "@chakra-ui/react"
 import { languages } from "@/data/languages" 
 import { words } from "@/data/words"
+import { getFarewellText } from "@/utils"
 
 export default function App() {
   // State values
@@ -91,19 +92,21 @@ export default function App() {
   const box1b = {
     flex: 1,
     w: "65%",
+    maxH: "100%",
     my: 5,
     align: "center",
-    borderRadius: "sm",
-    bg: gameWon ? "#10A95B" : gameLost ? "#BA2A2A" : "#7A5EA7",
-    color: "#F9F4DA",
+    justify: "center",
   }
 
    const gameStatusProps = {
     w: "100%",
-    p: 1,
+    p: 2,
     whiteSpace: "pre-line",
     textAlign: "center",
     fontWeight: "semibold",
+    bg: gameWon ? "#10A95B" : gameLost ? "#BA2A2A" : "#7A5EA7",
+    color: "#F9F4DA",
+    borderRadius: "sm",
   }
 
   const box2 = {
@@ -203,6 +206,7 @@ export default function App() {
     borderColor: "#D7D7D7",
   }
 
+  // Elements
   const headerAndDescription = <>
     <Heading {...headingProps}>
       Assembly: Endgame</Heading>
@@ -224,9 +228,10 @@ export default function App() {
           <Text fontSize="sm">You lose! Better start learning Assembly 😭</Text>
         </Box>
 
-      : <Box {...gameStatusProps}>
+      : wrongGuessCount > 0 && 
+        <Box {...gameStatusProps}>
           <Text fontSize="sm" fontStyle="italic">
-            "Farewell HTML & CSS" 🫡
+            {`"${getFarewellText(languages[wrongGuessCount - 1].name)}" 🫡`}
           </Text>
         </Box>  
   
