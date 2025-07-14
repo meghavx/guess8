@@ -1,4 +1,10 @@
-export const languages = [
+interface Language {
+  name: string
+  bg: string
+  color: string
+}
+
+export const languages: Language[] = [
   {
     name: "JavaScript",
     bg: "#2D519F",
