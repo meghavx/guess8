@@ -44,6 +44,11 @@ export default function App() {
     })
   }
 
+  function newGame() {
+    setGuessedLettersMap(new Map<string, boolean>())
+    setCurrentWord(() => pickRandomWord())
+  }
+
   // Layout Props
   const containerProps = {
     w: "auto",
@@ -289,6 +294,7 @@ export default function App() {
   const newGameButton = gameOver && 
     <Button 
       {...newGameBtnProps}
+      onClick={newGame}
     > 
       New Game 
     </Button>
