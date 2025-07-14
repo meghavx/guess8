@@ -123,6 +123,11 @@ export default function App() {
     px: 24,
   }
 
+  const languageChipBoxProps = {
+    display: "inline-block",
+    position: "relative",
+  }
+
   const languageChipProps = {
     w: "auto",
     h: 6,
@@ -131,8 +136,24 @@ export default function App() {
     fontSize: "xs",
     textAlign: "center",
     fontWeight: "semibold",
+    position: "relative",
+    overflow: "hidden",
+    display: "inline-block",
   }
-  
+
+  const skullOverlayProps = {
+    "position": "absolute",
+    "top": 0,
+    "left": 0,
+    "w": "100%",
+    "h": "90%",
+    "align": "center",
+    "justify": "center",
+    "fontSize": "0.85rem",
+    "bg": "rgba(0,0,0,0.7)",
+    "borderRadius": "sm",
+  }
+
   const box2b = {
     gap: 0.5,
   }  
@@ -209,17 +230,24 @@ export default function App() {
       : <Box {...gameStatusProps}>
           <Text fontSize="sm" fontStyle="italic">"Farewell HTML & CSS" 🫡</Text>
         </Box>  
-
+  
+  const markLanguageLost = 
+    <Flex {...skullOverlayProps}> 
+      💀 
+    </Flex> 
+  
   const languageChipElements = languages
-    .map(lang => 
-      <Text 
-        key={lang.name}
-        {...languageChipProps}
-        {...lang}
-      >
-        {lang.name}
-      </Text>
-    )
+    .map((lang, index) => {
+      const isLanguageLost = index < wrongGuessCount
+      return (
+        <Box key={index} {...languageChipBoxProps}>
+          <Text {...languageChipProps} {...lang}> 
+            {lang.name} 
+          </Text>
+          { isLanguageLost && markLanguageLost }
+        </Box>
+      )
+    })
 
   const wordLetters = currentWord
     .split("")
