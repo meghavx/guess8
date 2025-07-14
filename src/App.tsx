@@ -1,22 +1,10 @@
 import { Box, Flex, Button, Heading, Text } from "@chakra-ui/react"
+import { languages } from "./languages" 
 
 export default function App() {
-
   const gameWon: bool = false
-  const gameLost: bool = true
-
-  const languages: [string] = [
-    "JavaScript",  
-    "Python", 
-    "Ruby", 
-    "Java",
-    "TypeScript",
-    "Erlang",
-    "Haskell",
-    "Rust",
-    "Assembly",
-  ]
-
+  const gameLost: bool = false
+  
   const alphabet: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
   // Layout Props
@@ -93,17 +81,15 @@ export default function App() {
     align: "center",
     justify: "center",
     wrap: "wrap",
-    gap: 1,
+    gap: "2px",
     px: 24,
   }
 
-  const langTagsProps = {
+  const languageChipProps = {
     w: "auto",
     h: 6,
     p: 1,
-    bg: "#599137", 
-    color: "#F9F4DA",
-    rounded: "md",
+    rounded: "sm",
     fontSize: "xs",
     textAlign: "center",
     fontWeight: "semibold",
@@ -156,6 +142,25 @@ export default function App() {
     borderColor: "#D7D7D7",
   }
 
+  const languageChipElements = languages.map((lang, index) => 
+    <Text 
+      key={index} 
+      {...languageChipProps}
+      {...lang}
+    >
+      {lang.name}
+     </Text>
+  )
+
+  const keyboard = alphabet.split("").map((char, index) =>
+    <Button 
+      key={index} 
+      {...keyboardKeyProps}
+    >
+      {char}
+    </Button>
+  )
+
   return (
     // Container
     <Flex {...containerProps}>
@@ -165,6 +170,7 @@ export default function App() {
 
         {/* Box 1 Header + Game Status */}
         <Flex {...box1}>
+
           {/* Box 1a Header */}
           <Flex {...box1a}>
             <Heading {...headingProps}>Assembly: Endgame</Heading>
@@ -197,11 +203,10 @@ export default function App() {
 
         {/* Box 2 Languages + Word Input */}
         <Flex {...box2}>
+
           {/* Box 2a Languages */}
           <Flex {...box2a}>
-            {languages.map((lang, index) => (
-              <Box key={index} {...langTagsProps}>{lang}</Box>
-            ))}
+            {languageChipElements}
           </Flex>
 
           {/* Box 2b Word Input */}
@@ -218,9 +223,7 @@ export default function App() {
         {/* Box 3 Keyboard */}
         <Flex {...box3}>
           <Flex {...keyboardContainerProps}>
-            {alphabet.split("").map((char, index) => (
-              <Button key={index} {...keyboardKeyProps}>{char}</Button>
-            ))}
+            {keyboard}
           </Flex>
         </Flex>
 
@@ -230,7 +233,6 @@ export default function App() {
         </Flex>
 
       </Flex>
-
     </Flex>
   )
 }
