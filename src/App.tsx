@@ -177,7 +177,6 @@ export default function App() {
     justifyContent: "center",
     alignItems: "center",
     bg: "#323232",
-    color: "#F9F4DA",
     fontWeight: "semibold",
     borderBottom: "xs",
     borderColor: "#F9F4DA",
@@ -267,11 +266,19 @@ export default function App() {
 
   const wordLetters = currentWord
     .split("")
-    .map((letter, index) => (
-        <Text key={index} {...letterProps}>
-          {guessedLettersMap.has(letter) && letter}
-        </Text>
-      )
+    .map((letter, index) => {
+        const shouldBeRevealed = guessedLettersMap.has(letter) || gameLost 
+        const isMissingLetter = !guessedLettersMap.has(letter)
+        const letterColor = isMissingLetter ? "#EC5D49" : "#F9F4DA"
+        return (
+          <Text 
+            key={index} 
+            {...letterProps} 
+            color={letterColor}>
+            {shouldBeRevealed && letter}
+          </Text>
+        )
+      }
     )
 
   const keyboardElements = alphabet
