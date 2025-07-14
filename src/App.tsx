@@ -22,7 +22,7 @@ export default function App() {
 
   const gameWon: boolean = correctGuessCount === currentWord.length 
   const gameLost: boolean = wrongGuessCount === currentWord.length
-  const isGameOver = gameWon || gameLost
+  const gameOver = gameWon || gameLost
 
   // Static values
   const alphabet: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -191,6 +191,7 @@ export default function App() {
     borderRadius: "md",
     color: "#1E1E1E",
     borderColor: "#D7D7D7",
+    disabled: gameOver,
   }
   
   const box4 = {
@@ -271,11 +272,11 @@ export default function App() {
       return (
         <Button 
           key={letter} 
-          {...keyboardKeyProps}
           bg={ isGuessed 
             ? isCorrect ? "#10A95B" : "#EC5D49"
             : "#FCBA29"
           }
+          {...keyboardKeyProps}
           onClick={() => recordGuessedLetter(letter)}
         >
           {letter}
@@ -284,7 +285,7 @@ export default function App() {
     }
   )
 
-  const newGameButton = isGameOver && 
+  const newGameButton = gameOver && 
     <Button {...newGameBtnProps}> 
       New Game 
     </Button>
