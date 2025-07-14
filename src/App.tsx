@@ -205,10 +205,11 @@ export default function App() {
 
   const wordLetters = currentWord
     .split("")
-    .map((letter, index) => 
-      <Text key={index} {...letterProps}>
-        {letter}
-      </Text>
+    .map((letter, index) => (
+        <Text key={index} {...letterProps}>
+          {guessedLettersMap.has(letter) && letter}
+        </Text>
+      )
     )
 
   const keyboardElements = alphabet
