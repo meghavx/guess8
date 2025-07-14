@@ -21,6 +21,7 @@ export default function App() {
 
   const gameWon: boolean = correctGuessCount === currentWord.length 
   const gameLost: boolean = wrongGuessCount === currentWord.length
+  const isGameOver = gameWon || gameLost
 
   // Static values
   const alphabet: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -196,7 +197,6 @@ export default function App() {
   }
 
   const newGameBtnProps = {
-    display: gameWon || gameLost ? "flex" : "none",
     w: 200,
     bg: "#11B5E5",
     color: "#1E1E1E",
@@ -225,7 +225,9 @@ export default function App() {
         </Box>
 
       : <Box {...gameStatusProps}>
-          <Text fontSize="sm" fontStyle="italic">"Farewell HTML & CSS" 🫡</Text>
+          <Text fontSize="sm" fontStyle="italic">
+            "Farewell HTML & CSS" 🫡
+          </Text>
         </Box>  
   
   const markLanguageLost = 
@@ -241,7 +243,7 @@ export default function App() {
           <Text {...languageChipProps} {...lang}> 
             {lang.name} 
           </Text>
-          { isLanguageLost && markLanguageLost }
+          {isLanguageLost && markLanguageLost}
         </Box>
       )
     })
@@ -277,6 +279,11 @@ export default function App() {
     }
   )
 
+  const newGameButton = isGameOver && 
+    <Button {...newGameBtnProps}> 
+      New Game 
+    </Button>
+
   return (
     <Flex {...containerProps}>
       <Flex {...box0}>
@@ -295,9 +302,7 @@ export default function App() {
           <Flex {...keyboardContainerProps}> {keyboardElements} </Flex>
         </Flex>
 
-        <Flex {...box4}>
-          <Button {...newGameBtnProps}>New Game</Button>
-        </Flex>
+        <Flex {...box4}> {newGameButton} </Flex>
 
       </Flex>
     </Flex>
