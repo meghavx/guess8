@@ -1,8 +1,13 @@
 import { Flex, Box, Text } from "@chakra-ui/react"
-import { languages } from "@/data/languages" 
+import type { Language } from "@/data/languages"
+import type { JSX } from "react"
 
-export default function LanguageChips(props) {
-  const languageChipProps = {
+type LanguageChipsProps = {
+  languages: Language[],
+  wrongGuessCount: number,
+}
+export default function LanguageChips(props: LanguageChipsProps): JSX.Element {
+  const chipProps = {
     w: "auto",
     h: 6,
     p: 2,
@@ -28,20 +33,21 @@ export default function LanguageChips(props) {
     "borderRadius": "md",
   }
   
-  const languageChipElements = languages
-    .map((lang, index) => {
-      const isLanguageLost = index < props.wrongGuessCount
+  const languageChipElements: JSX.Element[] = props.languages
+    .map((lang: Language, index: number): JSX.Element => {
+      const isLanguageLost: boolean = index < props.wrongGuessCount
       return (
         <Box 
           key={index} 
           display="inline-block"
           position="relative"
         >
-          <Text {...languageChipProps} {...lang}> 
+          <Text {...chipProps} {...lang}> 
             {lang.name} 
           </Text>
-          {isLanguageLost && 
-            <Flex {...skullOverlayProps}> 💀 </Flex> 
+          { isLanguageLost 
+            ? <Flex {...skullOverlayProps}> 💀 </Flex> 
+            : <></>
           }
         </Box>
       )

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Flex } from "@chakra-ui/react"
 import { getRandomWord } from "@/utils"
+import { languages } from "@/data/languages" 
 
 import Header from "@/components/Header"
 import GameStatus from "@/components/GameStatus"
@@ -83,7 +84,10 @@ export default function App() {
           isWrongGuess={isWrongGuess}
           wrongGuessCount={wrongGuessCount} 
         />
-        <LanguageChips wrongGuessCount={wrongGuessCount} />
+        <LanguageChips
+          languages={languages} 
+          wrongGuessCount={wrongGuessCount} 
+        />
         <WordLetters 
           currentWord={currentWord}
           guessedLettersMap={guessedLettersMap}
