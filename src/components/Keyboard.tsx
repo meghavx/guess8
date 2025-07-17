@@ -1,7 +1,7 @@
 import { Flex, Button } from "@chakra-ui/react"
 
 export default function Keyboard(props) {
-  const alphabet: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  const alphabet: string = "QWERTYUIOPASDFGHJKLZXCVBNM"
 
   const keyboardElements = alphabet
     .split("")
