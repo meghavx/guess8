@@ -1,14 +1,13 @@
 import { useState } from "react"
 import { Box, Flex, Button, Heading, Text } from "@chakra-ui/react"
 import { languages } from "@/data/languages" 
-import { words } from "@/data/words"
-import { getFarewellText } from "@/utils"
+import { getRandomWord, getFarewellText } from "@/utils"
 import { useWindowSize } from "react-use"
 import Confetti from "react-confetti"
 
 export default function App() {
   // State values
-  const [currentWord, setCurrentWord] = useState(() => pickRandomWord())
+  const [currentWord, setCurrentWord] = useState(() => getRandomWord())
   const [guessedLettersMap, setGuessedLettersMap] = useState(new Map<string, boolean>())
   
   // Derived values
@@ -36,12 +35,6 @@ export default function App() {
   const { width, height } = useWindowSize()
 
   // Functions
-  function pickRandomWord() { 
-    const randomIndex = Math.floor(Math.random() * words.length)
-    const randomWord = words[randomIndex]
-    return randomWord
-  }
-
   function recordGuessedLetter(letter: string) {
     const isCorrect = currentWord.includes(letter)
 
@@ -54,7 +47,7 @@ export default function App() {
 
   function newGame() {
     setGuessedLettersMap(new Map<string, boolean>())
-    setCurrentWord(() => pickRandomWord())
+    setCurrentWord(() => getRandomWord())
   }
 
   // Layout Props
