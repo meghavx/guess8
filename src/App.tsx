@@ -10,7 +10,7 @@ export default function App() {
   // State values
   const [currentWord, setCurrentWord] = useState(() => pickRandomWord())
   const [guessedLettersMap, setGuessedLettersMap] = useState(new Map<string, boolean>())
- 
+  
   // Derived values
   const wrongGuessCount = Array
     .from(guessedLettersMap.values())
@@ -22,6 +22,9 @@ export default function App() {
       guessedLettersMap.has(letter) ? acc + 1 : acc, 0
     )
 
+  const isWrongGuess = guessedLettersMap.size > 0 
+    ? !(Array.from(guessedLettersMap.values()).at(-1) ?? false)
+    : false
   const gameWon: boolean = correctGuessCount === currentWord.length 
   const gameLost: boolean = wrongGuessCount === currentWord.length
   const gameOver = gameWon || gameLost
@@ -239,7 +242,7 @@ export default function App() {
           <Text fontSize="sm">You lose! Better start learning Assembly 😭</Text>
         </Box>
 
-      : wrongGuessCount > 0 && 
+      : isWrongGuess && 
         <Box {...gameStatusProps}>
           <Text fontSize="sm" fontStyle="italic">
             {`"${getFarewellText(languages[wrongGuessCount - 1].name)}" 🫡`}
