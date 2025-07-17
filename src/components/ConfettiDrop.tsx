@@ -4,7 +4,7 @@ import { useWindowSize } from "react-use"
 export default function ConfettiDrop(props) {
   const { width, height } = useWindowSize()
  
-  return ( props.gameWon && 
+  return ( props.isGameWon && 
     <Confetti 
       width={width} 
       height={height} 

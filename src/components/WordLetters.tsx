@@ -16,7 +16,7 @@ export default function WordLetters(props) {
   const wordLetters = props.currentWord
     .split("")
     .map((letter: string, index: number) => {
-        const shouldBeRevealed = props.guessedLettersMap.has(letter) || props.gameLost 
+        const shouldBeRevealed = props.guessedLettersMap.has(letter) || props.isGameLost 
         const isMissingLetter = !props.guessedLettersMap.has(letter)
         const letterColor = isMissingLetter ? "#EC5D49" : "#F9F4DA"
         return (

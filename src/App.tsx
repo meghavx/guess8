@@ -30,9 +30,9 @@ export default function App() {
     ? !(Array.from(guessedLettersMap.values()).at(-1) ?? false)
     : false
 
-  const gameWon: boolean = correctGuessCount === currentWord.length 
-  const gameLost: boolean = wrongGuessCount === currentWord.length
-  const gameOver = gameWon || gameLost
+  const isGameWon: boolean = correctGuessCount === currentWord.length 
+  const isGameLost: boolean = wrongGuessCount === currentWord.length
+  const gameOver = isGameWon || isGameLost
   
   // Functions
   function recordGuessedLetter(letter: string) {
@@ -75,11 +75,11 @@ export default function App() {
   return (
     <Flex {...appContainerProps}>
       <Flex {...gameContainerProps}>
-        <ConfettiDrop gameWon={gameWon} />  
+        <ConfettiDrop isGameWon={isGameWon} />  
         <Header />
         <GameStatus 
-          gameWon={gameWon}
-          gameLost={gameLost}
+          isGameWon={isGameWon}
+          isGameLost={isGameLost}
           isWrongGuess={isWrongGuess}
           wrongGuessCount={wrongGuessCount} 
         />
@@ -87,7 +87,7 @@ export default function App() {
         <WordLetters 
           currentWord={currentWord}
           guessedLettersMap={guessedLettersMap}
-          gameLost={gameLost}
+          isGameLost={isGameLost}
         />
         <Keyboard 
           guessedLettersMap={guessedLettersMap}

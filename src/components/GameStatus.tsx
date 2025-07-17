@@ -9,18 +9,18 @@ export default function Header(props) {
     textAlign: "center",
     whiteSpace: "pre-line",
     fontWeight: "semibold",
-    bg: props.gameWon ? "#10A95B" : props.gameLost ? "#BA2A2A" : "#7A5EA7",
+    bg: props.isGameWon ? "#10A95B" : props.isGameLost ? "#BA2A2A" : "#7A5EA7",
     color: "#F9F4DA",
     borderRadius: "sm",
   }
   
-  const gameStatus = props.gameWon 
+  const gameStatus = props.isGameWon 
     ? <Box {...gameStatusProps}>
         <Text>You win!</Text>
         <Text fontSize="sm">Well done! 🎉</Text>
       </Box>
         
-    : props.gameLost 
+    : props.isGameLost 
       ? <Box {...gameStatusProps}>
           <Text>Game over!</Text>
           <Text fontSize="sm">You lose! Better start learning Assembly 😭</Text>
