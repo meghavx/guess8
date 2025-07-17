@@ -12,16 +12,14 @@ export default function Keyboard(props) {
       
       return (
         <Button 
-          key={letter} 
+          key={letter}
           w={1}
+          size="sm" 
           opacity={1}
           fontSize="sm"
           color="#1E1E1E"
           bg={isGuessed ? (isCorrect ? "#10A95B" : "#EC5D49") : "#FCBA29"}
-          border={2}
           borderRadius="lg"
-          borderStyle="solid"
-          borderColor="#FCBA29"
           onClick={() => props.recordGuessedLetter(letter)}
           disabled={shouldBeDisabled}
         >
