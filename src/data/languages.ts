@@ -1,4 +1,4 @@
-interface Language {
+type Language = {
   name: string
   bg: string
   color: string

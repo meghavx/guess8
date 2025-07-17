@@ -1,13 +1,15 @@
 import { words } from "@/data/words"
 
-export function getRandomWord() { 
-  const randomIndex = Math.floor(Math.random() * words.length)
-  const randomWord = words[randomIndex]
-  return randomWord
+function getRandomIndex<T>(arr: T[]): number {
+  return Math.floor(Math.random() * arr.length)
 }
 
-export function getFarewellText(language: string) {
-  const options = [
+export function getRandomWord(): string {  
+  return words[getRandomIndex(words)]
+}
+
+export function getFarewellText(language: string): string {
+  const options: string[] = [
     `Farewell, ${language}`,
     `Adios, ${language}`,
     `R.I.P., ${language}`,
@@ -20,8 +22,6 @@ export function getFarewellText(language: string) {
     `${language}, it's been real`,
     `${language}, your watch has ended`,
     `${language} has left the building`
-  ];
-
-  const randomIndex = Math.floor(Math.random() * options.length);
-  return options[randomIndex];
+  ]
+  return options[getRandomIndex(options)];
 }
