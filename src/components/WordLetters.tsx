@@ -1,6 +1,13 @@
 import { Flex, Text } from "@chakra-ui/react"
+import type { JSX } from "react"
 
-export default function WordLetters(props) {
+type WordLettersProps = {
+  currentWord: string,
+  guessedLettersMap: Map<string, boolean>,
+  isGameLost: boolean,
+}
+
+export default function WordLetters(props: WordLettersProps): JSX.Element {
   const letterProps = {
     w: 9,
     h: 9,  
@@ -13,12 +20,12 @@ export default function WordLetters(props) {
     borderColor: "#F9F4DA",
   }
 
-  const wordLetters = props.currentWord
+  const wordLetters: JSX.Element[] = props.currentWord
     .split("")
-    .map((letter: string, index: number) => {
-        const shouldBeRevealed = props.guessedLettersMap.has(letter) || props.isGameLost 
-        const isMissingLetter = !props.guessedLettersMap.has(letter)
-        const letterColor = isMissingLetter ? "#EC5D49" : "#F9F4DA"
+    .map((letter: string, index: number): JSX.Element => {
+        const shouldBeRevealed: boolean = props.guessedLettersMap.has(letter) || props.isGameLost 
+        const isMissingLetter: boolean = !props.guessedLettersMap.has(letter)
+        const letterColor: string = isMissingLetter ? "#EC5D49" : "#F9F4DA"
         return (
           <Text 
             key={index} 

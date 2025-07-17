@@ -1,14 +1,20 @@
 import { Flex, Button } from "@chakra-ui/react"
+import type { JSX } from "react"
 
-export default function Keyboard(props) {
-  const alphabet: string = "QWERTYUIOPASDFGHJKLZXCVBNM"
+type KeyboardProps = {
+  alphabet: string,
+  guessedLettersMap: Map<string, boolean>,
+  recordGuessedLetter: (letter: string) => void,
+  isGameOver: boolean
+}
 
-  const keyboardElements = alphabet
+export default function Keyboard(props: KeyboardProps): JSX.Element {
+  const keyboardElements: JSX.Element[] = props.alphabet
     .split("")
-    .map(letter => {
-      const isGuessed = props.guessedLettersMap.has(letter)
-      const isCorrect = isGuessed && props.guessedLettersMap.get(letter)
-      const shouldBeDisabled = props.guessedLettersMap.has(letter) || props.gameOver
+    .map((letter: string): JSX.Element => {
+      const isGuessed: boolean = props.guessedLettersMap.has(letter)
+      const isCorrect: boolean = isGuessed && (props.guessedLettersMap.get(letter) ?? false)
+      const shouldBeDisabled: boolean = props.guessedLettersMap.has(letter) || props.isGameOver
       
       return (
         <Button 

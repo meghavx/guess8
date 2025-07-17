@@ -16,6 +16,9 @@ export default function App() {
   const [currentWord, setCurrentWord] = useState(() => getRandomWord())
   const [guessedLettersMap, setGuessedLettersMap] = useState(new Map<string, boolean>())
   
+  // Static values
+  const alphabet: string = "QWERTYUIOPASDFGHJKLZXCVBNM"
+  
   // Derived values
   const wrongGuessCount = Array
     .from(guessedLettersMap.values())
@@ -33,10 +36,10 @@ export default function App() {
 
   const isGameWon: boolean = correctGuessCount === currentWord.length 
   const isGameLost: boolean = wrongGuessCount === currentWord.length
-  const gameOver = isGameWon || isGameLost
+  const isGameOver = isGameWon || isGameLost
   
   // Functions
-  function recordGuessedLetter(letter: string) {
+  function recordGuessedLetter(letter: string): void {
     const isCorrect = currentWord.includes(letter)
 
     setGuessedLettersMap(prevMap => {
@@ -44,13 +47,14 @@ export default function App() {
       newMap.set(letter, isCorrect)
       return newMap
     })
-  }  
+  } 
 
   function newGame() {
     setGuessedLettersMap(new Map<string, boolean>())
     setCurrentWord(() => getRandomWord())
   }
 
+  
   // Layout Props
   const appContainerProps = {
     w: "auto",
@@ -94,12 +98,13 @@ export default function App() {
           isGameLost={isGameLost}
         />
         <Keyboard 
+          alphabet={alphabet}
           guessedLettersMap={guessedLettersMap}
           recordGuessedLetter={recordGuessedLetter}
-          gameOver={gameOver}
+          isGameOver={isGameOver}
         />
         <NewGameButton 
-          gameOver={gameOver} 
+          isGameOver={isGameOver} 
           handleClick={newGame} 
         />
       </Flex>

@@ -1,6 +1,12 @@
 import { Flex, Button } from "@chakra-ui/react"
+import type { JSX } from "react"
 
-export default function NewGameButton(props) {
+type NewGameButtonProps = {
+  isGameOver: boolean,
+  handleClick: () => void,
+}
+
+export default function NewGameButton(props: NewGameButtonProps): JSX.Element {
   return (
     <Flex 
       flex={1}
@@ -8,7 +14,7 @@ export default function NewGameButton(props) {
       align="center"
       justify="center"
     >
-      {props.gameOver &&
+      {props.isGameOver &&
         <Button 
           w={180}
           bg="#11B5E5"
