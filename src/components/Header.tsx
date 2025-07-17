@@ -1,6 +1,7 @@
 import { Flex, Heading, Text } from "@chakra-ui/react"
+import type { JSX } from "react"
 
-export default function Header() {
+export default function Header(): JSX.Element {
   return (
     <Flex
       flex={2}
