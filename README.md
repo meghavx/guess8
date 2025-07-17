@@ -1,6 +1,7 @@
 <h1><img src="/public/w_icon.png" height="24px">  Assembly: Endgame</h1>
 
 ![React](https://img.shields.io/badge/React-149ECA?style=flat&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)
 ![Chakra UI](https://img.shields.io/badge/Chakra--UI-319795?style=flat&logo=chakraui&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-2196F3.svg)
@@ -13,6 +14,7 @@ Guess the word in under 8 attempts to keep the programming world safe from Assem
 
 ## Features
 
+- Built with TypeScript for type safety and robust code
 - Guess the word letter by letter
 - Instant visual feedback for correct and incorrect guesses
 - Farewell message appears whenever a wrong guess eliminates a language
@@ -32,7 +34,7 @@ Guess the word in under 8 attempts to keep the programming world safe from Assem
 
 ## Tech Stack
 
-- **React + TypeScript** — Frontend
+- **React + TypeScript** — UI library with static typing
 - **Vite** — Fast dev server and build tool
 - **Chakra UI** — UI components
 - **React Confetti** — Celebration effect
