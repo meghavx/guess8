@@ -11,13 +11,13 @@ export const languages: Language[] = [
     color: "#F9F4DA",
   },
   {
-    name: "Python",
-    bg: "#328AF1",
-    color: "#F9F4DA",
-  },
-  {
     name: "Ruby",
     bg: "#F4EB13",
+    color: "#1E1E1E",
+  },
+  {
+    name: "Python",
+    bg: "#328AF1",
     color: "#1E1E1E",
   },
   {
@@ -28,12 +28,12 @@ export const languages: Language[] = [
   {
     name: "TypeScript",
     bg: "#298EC6",
-    color: "#F9F4DA",
+    color: "#1E1E1E",
   },
   {
     name: "Erlang",
     bg: "#599137",
-    color: "#F9F4DA",
+    color: "#1E1E1E",
   },
   {
     name: "Haskell",
@@ -43,7 +43,7 @@ export const languages: Language[] = [
   {
     name: "Rust",
     bg: "#E2680F",
-    color: "#F9F4DA",
+    color: "#1E1E1E",
   },
   {
     name: "Assembly",
