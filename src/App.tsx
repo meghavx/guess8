@@ -17,7 +17,7 @@ export default function App() {
   const [guessedLettersMap, setGuessedLettersMap] = useState(new Map<string, boolean>())
   
   // Static values
-  const alphabet: string = "QWERTYUIOPASDFGHJKLZXCVBNM"
+  const alphabet: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   
   // Derived values
   const wrongGuessCount = Array
