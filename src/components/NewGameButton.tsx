@@ -16,7 +16,8 @@ export default function NewGameButton(props: NewGameButtonProps): JSX.Element {
     >
       {props.isGameOver &&
         <Button 
-          w={180}
+          w={{ base: "120", md: "180" }}
+          h={{ base: "9", md: "auto" }}
           bg="#11B5E5"
           color="#1E1E1E"
           borderColor="#D7D7D7"

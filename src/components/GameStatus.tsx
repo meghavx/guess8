@@ -20,7 +20,7 @@ export default function GameStatus(props: GameStatusProps): JSX.Element {
   
   const statusBoxProps = {
     w: "100%",
-    p: 2,
+    p: "2",
     textAlign: "center",
     whiteSpace: "pre-line",
     fontWeight: "semibold",
@@ -39,16 +39,16 @@ export default function GameStatus(props: GameStatusProps): JSX.Element {
     props.isGameWon 
     ? <>
         <Text>You win!</Text>
-        <Text fontSize="sm">Well done! 🎉</Text>
+        <Text fontSize={{ base: "xs", md: "sm" }}>Well done! 🎉</Text>
       </>        
     : props.isGameLost 
     ? <>
         <Text>Game over!</Text>
-        <Text fontSize="sm">You lose! Better start learning Assembly 😭</Text>
+        <Text fontSize={{ base: "xs", md: "sm" }}>You lose! Better start learning Assembly 😭</Text>
         </>
     : props.isWrongGuess
     ? <>
-        <Text fontSize="sm" fontStyle="italic">
+        <Text fontSize={{ base: "xs", md: "sm" }} fontStyle="italic">
           {getLanguageLostText()}
         </Text>
       </>
@@ -56,12 +56,12 @@ export default function GameStatus(props: GameStatusProps): JSX.Element {
 
   return (
     <Flex 
-      flex={2}
-      w="100%"
+      flex="2"
+      w={{ base: "90%", md: "100%" }}
       align="center"
       justify="center"
-      px={8}
-      mb={2}
+      px={{ base: "auto", md: "8" }}
+      mb="2"
     > 
       <Box {...statusBoxProps}>
         {statusContent}

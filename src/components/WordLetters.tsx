@@ -9,8 +9,8 @@ type WordLettersProps = {
 
 export default function WordLetters(props: WordLettersProps): JSX.Element {
   const letterProps = {
-    w: 9,
-    h: 9,  
+    w: { base: "8", md: "9" },
+    h: { base: "8", md: "9" },  
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -39,11 +39,11 @@ export default function WordLetters(props: WordLettersProps): JSX.Element {
 
   return (
     <Flex 
-      flex={2} 
-      w="100%" 
+      flex="2" 
+      w={{ base: "90%", md: "100%" }} 
       align="center" 
       justify="center" 
-      gap={0.5}
+      gap="0.5"
     > 
       {wordLetters} 
     </Flex>

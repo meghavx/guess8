@@ -19,9 +19,9 @@ export default function Keyboard(props: KeyboardProps): JSX.Element {
       return (
         <Button 
           key={letter}
-          w={1}
-          size="sm" 
-          opacity={1}
+          w="1"
+          size={{ base: "xs", md: "sm" }} 
+          opacity="1"
           fontSize="sm"
           color="#1E1E1E"
           bg={isGuessed ? (isCorrect ? "#10A95B" : "#EC5D49") : "#FCBA29"}
@@ -37,13 +37,13 @@ export default function Keyboard(props: KeyboardProps): JSX.Element {
 
   return (
     <Flex 
-      flex={3}
-      w="100%"
+      flex="3"
+      w={{ base: "90%", md: "100%" }}
       align="center"
       justify="center"
       wrap="wrap"
-      gap={1}
-      mb={2}
+      gap="1"
+      mb="2"
     > 
       {keyboardElements} 
     </Flex>

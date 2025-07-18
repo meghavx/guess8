@@ -66,14 +66,14 @@ export default function App() {
   } 
 
   const gameContainerProps = {
-    w: "400px",
-    h: "100%",
+    w: { base: "80%", md: "400px" },
+    h: { base: "90%", md: "100%" },
     direction: "column",
     align: "center",
     justify: "center",
-    gap: 4,
-    py: "10",
-    border: 2,
+    gap: "4",
+    py: { base: "16", md: "10" },  
+    border: "2",
     borderColor: "white",
   }
 

@@ -12,7 +12,7 @@ export default function LanguageChips(props: LanguageChipsProps): JSX.Element {
     h: 6,
     p: 2,
     rounded: "md",
-    fontSize: "xs",
+    fontSize: { base: "10px", md: "xs" },
     textAlign: "center",
     fontWeight: "semibold",
     overflow: "hidden",
@@ -22,13 +22,13 @@ export default function LanguageChips(props: LanguageChipsProps): JSX.Element {
 
   const skullOverlayProps = {
     "position": "absolute",
-    "top": 0,
-    "left": 0,
+    "top": "0",
+    "left": "0",
     "w": "100%",
     "h": "100%",
     "align": "center",
     "justify": "center",
-    "fontSize": "0.8rem",
+    "fontSize": { base: "0.7rem", md: "0.8rem" },
     "bg": "rgba(0,0,0,0.7)",
     "borderRadius": "md",
   }
@@ -55,13 +55,13 @@ export default function LanguageChips(props: LanguageChipsProps): JSX.Element {
   
   return (
     <Flex 
-      flex={1}
-      w="100%"
+      flex="1"
+      w={{ base: "90%", md: "100%" }}
       align="center"
       justify="center"
       wrap="wrap"
-      gap={1}
-      px={8}
+      gap="1"
+      px="8"
     > 
       {languageChipElements} 
     </Flex>
